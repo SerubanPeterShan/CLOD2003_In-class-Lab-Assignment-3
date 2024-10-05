@@ -39,6 +39,7 @@ func UserHandler(w http.ResponseWriter, r *http.Request) {
 	id, _ := strconv.Atoi(idStr)
 
 	switch r.Method {
+	//&task is a pointer to the task slice and &nextID is a pointer to the nextID variable
 	case http.MethodPost:
 		createTask(w, r, &task, &nextID)
 	case http.MethodGet:
