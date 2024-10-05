@@ -19,6 +19,7 @@ type Task struct {
 var task = []Task{}
 var nextID = 1
 
+// The main function starts the server on port 8091.
 func main() {
 	http.HandleFunc("/tasks", UserHandler)
 	http.HandleFunc("/tasks/", UserHandler)
@@ -29,6 +30,9 @@ func main() {
 	}
 }
 
+// This function is the handler for the /tasks and /tasks/ endpoints.
+// It parses the URL to determine if the request is for a specific task or all tasks.
+// It then delegates the request to the appropriate handler function.
 func UserHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	idStr := strings.TrimPrefix(r.URL.Path, "/tasks/")
