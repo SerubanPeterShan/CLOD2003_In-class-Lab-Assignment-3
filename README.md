@@ -68,7 +68,7 @@ http://localhost:8092/tasks/<task_id>
 To update a task with ID 1, use the following curl command:
 
 ```console
-curl -X 'http://localhost:8092/task' \
+curl -X PUT 'http://localhost:8092/task' \
 --header 'Content-Type: application/json' \
 --data '{
            "title": "New Task _ v1 ",
