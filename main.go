@@ -24,8 +24,10 @@ func main() {
 	http.HandleFunc("/tasks", UserHandler)
 	http.HandleFunc("/tasks/", UserHandler)
 
+	http.HandleFunc("/updatetasks/", UserHandler_4_update)
+
 	log.Println("Starting server on :8091...")
-	if err := http.ListenAndServe(":8091", nil); err != nil {
+	if err := http.ListenAndServe(":8092", nil); err != nil {
 		log.Fatal(err)
 	}
 }
@@ -55,5 +57,44 @@ func UserHandler(w http.ResponseWriter, r *http.Request) {
 	default:
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		fmt.Fprintf(w, "Method not allowed")
+	}
+}
+
+// creatiing new handler for edit as method cannot be determined from satsk ID
+
+func UserHandler_4_update(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	idStr := strings.TrimPrefix(r.URL.Path, "/updatetasks/")
+	id, _ := strconv.Atoi(idStr)
+
+	switch r.Method {
+
+	case http.MethodPost:
+
+		updateTask(w, r, &task, id)
+		fmt.Println("welcome to put bitch ")
+	case http.MethodGet:
+		if id > 0 {
+			w.WriteHeader(http.StatusMethodNotAllowed)
+			fmt.Fprintf(w, "Method not allowed")
+			fmt.Println("get block")
+		} else {
+			w.WriteHeader(http.StatusMethodNotAllowed)
+			fmt.Fprintf(w, "Method not allowed")
+			fmt.Println("Hello, World!")
+		}
+	case http.MethodPut:
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		fmt.Fprintf(w, "Method not allowed")
+		fmt.Println(" put block ")
+
+	case http.MethodDelete:
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		fmt.Fprintf(w, "Method not allowed")
+		fmt.Println("delete block")
+	default:
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		fmt.Fprintf(w, "Method not allowed")
+		fmt.Println("default blcom ")
 	}
 }
