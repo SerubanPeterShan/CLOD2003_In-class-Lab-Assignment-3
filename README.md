@@ -6,9 +6,7 @@ This Guide explains how to use the Task Create API using the curl command to cre
 This URL can be accessed through the POST method:
 http://localhost:8092/tasks/
 
-> Replace <task_id> with the ID of the task you want to update.
->
->In header add Content-Type: application/json
+
 
 **Fields to add tasks:**
 ```json
