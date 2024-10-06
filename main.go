@@ -72,7 +72,7 @@ func UserHandler_4_update(w http.ResponseWriter, r *http.Request) {
 	case http.MethodPost:
 
 		updateTask(w, r, &task, id)
-		fmt.Println("welcome to put bitch ")
+		fmt.Println("welcome to put bw ")
 	case http.MethodGet:
 		if id > 0 {
 			w.WriteHeader(http.StatusMethodNotAllowed)
