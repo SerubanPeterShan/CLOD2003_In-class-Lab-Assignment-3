@@ -1,14 +1,22 @@
+# CLOD2003 In Class Assignment 3 (Group A) #
+
+Seruban Peter Shan (500235797)
+
+## Task Management API Guide ##
+
+This guide explains how to use the Task Management API to create, update, and retrieve tasks using the `curl` command.
+
 ## Task Create API ##
-This Guide explains how to use the Task Create API using the curl command to create am existing task with given by user for title ,description or status 
 
+This section explains how to use the Task Create API to create a new task.
 
-**API POST Method URL:**
-This URL can be accessed through the POST method:
-http://localhost:8092/tasks/
+### API POST Method URL ##
 
+Access the URL through the POST method:
+<http://localhost:8092/tasks/>
 
+### Fields to Add Tasks ##
 
-**Fields to add tasks:**
 ```json
 {
     "title": "New task title",
@@ -16,23 +24,26 @@ http://localhost:8092/tasks/
     "status": "New task status"
 }
 ```
-> **_If any of the field is empty it will asign the defualt values for each field_**
 
-**Fields with default values:**
+> **Note:** If any of the fields are empty, default values will be assigned.
+
+### Fields with Default Values ###
+
 ```json
 {
-    "title":"Sample Task",
-    "description":"This is a sample task description",
-    "status":"pending"
+    "title": "Sample Task",
+    "description": "This is a sample task description",
+    "status": "pending"
 }
 ```
-**ID** number is Automatically incremented
 
-**_Sample Request_**
+The **ID** number is automatically incremented.
 
-To create a new task, use the following curl command:
+### Sample Request - Create Task ###
 
-```console
+To create a new task, use the following `curl` command:
+
+```sh
 curl -X POST 'http://localhost:8092/tasks/' \
 --header 'Content-Type: application/json' \
 --data '{
@@ -42,19 +53,57 @@ curl -X POST 'http://localhost:8092/tasks/' \
 }'
 ```
 
+## Task Get API ##
+
+This section explains how to use the API to get all tasks or a specific task by ID.
+
+### API GET Method URL ###
+
+Access the URL through the GET method to **GET ALL TASKS**:
+<http://localhost:8092/tasks/>
+
+**OR**
+
+Access the URL through the GET method to **GET TASK BY ID**:
+<http://localhost:8092/tasks/(task_id)>
+
+> Replace `<task_id>` with the ID of the task you want to retrieve.
+>
+> In the header, add `Content-Type: application/json`.
+
+### Sample Request - Get all task ###
+
+To get all task, use the following `curl` command:
+
+```sh
+curl -X GET 'http://localhost:8092/tasks/' \
+--header 'Content-Type: application/json'
+```
+
+### Sample Request - Get task by id ###
+
+To get a task by id, use the following `curl` command:
+
+```sh
+curl -X GET 'http://localhost:8092/tasks/(taskid)' \
+--header 'Content-Type: application/json'
+```
 
 ## Task Update API ##
-This guide explains how to use the Task Update API using the curl command to update an existing task with new values for title, description, or status.
 
-**API PUT Method URL:**
-This URL can be accessed through the PUT method:
-http://localhost:8092/tasks/<task_id>
+This section explains how to use the Task Update API to update an existing task.
 
-> Replace <task_id> with the ID of the task you want to update.
+### API PUT Method URL ###
+
+Access the URL through the PUT method:
+<http://localhost:8092/tasks/(task_id)>
+
+> Replace `<task_id>` with the ID of the task you want to update.
 >
->In header add Content-Type: application/json
+> In the header, add `Content-Type: application/json`.
 
-**Fields to be updated:**
+### Fields to be Updated ###
+
 ```json
 {
     "title": "New task title",
@@ -62,19 +111,19 @@ http://localhost:8092/tasks/<task_id>
     "status": "New task status"
 }
 ```
-> **_If no changes are required for any of these fields, leave the corresponding field empty in the JSON payload._**
 
-**Sample Request**
-To update a task with ID 1, use the following curl command:
+> **Note:** If no changes are required for any of these fields, leave the corresponding field empty in the JSON payload.
 
-```console
-curl -X PUT 'http://localhost:8092/task' \
+### Sample Request - Update Task ###
+
+To update a task with ID 1, use the following `curl` command:
+
+```sh
+curl -X PUT 'http://localhost:8092/tasks/1' \
 --header 'Content-Type: application/json' \
 --data '{
-           "title": "New Task _ v1 ",
-           "description": "Poathan",
-           "status": "Chama"
+           "title": "New Task v1",
+           "description": "Updated description",
+           "status": "Updated status"
 }'
 ```
-
-
