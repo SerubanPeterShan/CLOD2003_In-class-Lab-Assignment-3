@@ -1,6 +1,9 @@
 # CLOD2003 In Class Assignment 3 (Group A) #
 
-Seruban Peter Shan (500235797)
+Seruban Peter Shan (500235797)\
+Nipuna Pamuditha Karunarathna (500238003)\
+Ashish Poudel (500237600)\
+Ikechukwu Samuel Madu (500236443)
 
 ## Task Management API Guide ##
 
@@ -13,7 +16,7 @@ This section explains how to use the Task Create API to create a new task.
 ### API POST Method URL ##
 
 Access the URL through the POST method:
-<http://localhost:8092/tasks/>
+<http://localhost:8092/tasks>
 
 ### Fields to Add Tasks ##
 
@@ -44,7 +47,7 @@ The **ID** number is automatically incremented.
 To create a new task, use the following `curl` command:
 
 ```sh
-curl -X POST 'http://localhost:8092/tasks/' \
+curl -X POST 'http://localhost:8092/tasks' \
 --header 'Content-Type: application/json' \
 --data '{
            "title": "Sample Task",
@@ -60,7 +63,7 @@ This section explains how to use the API to get all tasks or a specific task by 
 ### API GET Method URL ###
 
 Access the URL through the GET method to **GET ALL TASKS**:
-<http://localhost:8092/tasks/>
+<http://localhost:8092/tasks>
 
 **OR**
 
@@ -76,7 +79,7 @@ Access the URL through the GET method to **GET TASK BY ID**:
 To get all task, use the following `curl` command:
 
 ```sh
-curl -X GET 'http://localhost:8092/tasks/' \
+curl -X GET 'http://localhost:8092/tasks' \
 --header 'Content-Type: application/json'
 ```
 
@@ -126,4 +129,26 @@ curl -X PUT 'http://localhost:8092/tasks/1' \
            "description": "Updated description",
            "status": "Updated status"
 }'
+```
+
+## Task DELETE API ##
+
+This section explains how to use the Task Delete API to update an existing task.
+
+### API DELETE Method URL ###
+
+Access the URL through the DELETE method:
+<http://localhost:8092/tasks/(task_id)>
+
+> Replace `<task_id>` with the ID of the task you want to delete.
+>
+> In the header, add `Content-Type: application/json`.
+
+### Sample Request - Delete Task ###
+
+To update a task with ID 1, use the following `curl` command:
+
+```sh
+curl -X DELETE 'http://localhost:8092/tasks/1' \
+--header 'Content-Type: application/json' \
 ```
