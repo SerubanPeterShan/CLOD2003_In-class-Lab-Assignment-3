@@ -44,14 +44,14 @@ func UserHandler(w http.ResponseWriter, r *http.Request) {
 		createTask(w, r, &task, &nextID)
 	case http.MethodGet:
 		if id > 0 {
-			getTaskID(w, r, &task, id)
+			getTaskID(w, &task, id)
 		} else {
-			getAllTasks(w, r, task)
+			getAllTasks(w, task)
 		}
 	case http.MethodPut:
 		updateTask(w, r, &task, id)
 	case http.MethodDelete:
-		deleteTask(w, r, &task, id)
+		deleteTask(w, &task, id)
 	default:
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		fmt.Fprintf(w, "Method not allowed")

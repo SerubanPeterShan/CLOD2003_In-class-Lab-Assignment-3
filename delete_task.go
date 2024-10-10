@@ -6,20 +6,21 @@ import (
 	"net/http"
 )
 
-func deleteTask(w http.ResponseWriter, r *http.Request, tasks *[]Task, id int) {
-	err := json.NewDecoder(r.Body).Decode(&tasks)
-	if err != nil {
-		http.Error(w, "Invalid request payload", http.StatusBadRequest)
-		return
-	}
+type Response struct {
+	Message string `json:"message"`
+}
+
+func deleteTask(w http.ResponseWriter, tasks *[]Task, id int) {
 	for i, task := range *tasks {
 		if task.ID == id {
 			*tasks = append((*tasks)[:i], (*tasks)[i+1:]...)
 			w.WriteHeader(http.StatusOK)
-			fmt.Fprintf(w, "Task with ID %d deleted", id)
+			response := Response{Message: fmt.Sprintf("Task with ID %d deleted", id)}
+			json.NewEncoder(w).Encode(response)
 			return
 		}
 	}
 	w.WriteHeader(http.StatusNotFound)
-	fmt.Fprintf(w, "Task with ID %d not found", id)
+	response := Response{Message: fmt.Sprintf("Task with ID %d not found", id)}
+	json.NewEncoder(w).Encode(response)
 }
