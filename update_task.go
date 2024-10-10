@@ -8,11 +8,6 @@ import (
 func updateTask(w http.ResponseWriter, r *http.Request, tasks *[]Task, id int) {
 
 	var updatedTask Task
-	err := json.NewDecoder(r.Body).Decode(&updatedTask)
-	if err != nil {
-		http.Error(w, "Invalid request payload", http.StatusBadRequest)
-		return
-	}
 
 	for i, task := range *tasks {
 		if task.ID == id {

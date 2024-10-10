@@ -7,11 +7,6 @@ import (
 )
 
 func getTaskID(w http.ResponseWriter, r *http.Request, tasks *[]Task, id int) {
-	err := json.NewDecoder(r.Body).Decode(&tasks)
-	if err != nil {
-		http.Error(w, "Invalid request payload", http.StatusBadRequest)
-		return
-	}
 	for _, task := range *tasks {
 		if task.ID == id {
 			json.NewEncoder(w).Encode(task)
